@@ -1,26 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { FC } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { getEmployers } from "redux/reducer";
-import { tableColumns } from "../../utils/utils";
+import { stringType } from "types";
+import { tableColumns } from "utils/utils";
 import Row from "./rows/row";
 import * as S from "./table.styles";
 
-const Table = ({ searchValue }: any) => {
-	const [isLoading, setIsLoading] = useState(false);
+const Table: FC<any> = ({ searchValue }): JSX.Element => {
 	const [initialUsers, setInitialUsers] = useState([]);
 	const [filteredUsers, setFilteredUsers] = useState([]);
 	const dispatch = useDispatch();
-	const selector = useSelector((state) => state);
+	const loading = useSelector((state: any) => state.employers.loading);
+	const data = useSelector((state: any) => state.employers.employers);
+
+	console.log("data from saga", data);
 
 	useEffect(() => {
+		console.log(" filteredUsers in useEffect", filteredUsers);
+
+		setInitialUsers(data);
+		setFilteredUsers(data);
 		dispatch(getEmployers());
 	}, []);
 
 	useEffect(() => {
 		setFilteredUsers(getFilteredUsers());
-		
 	}, [searchValue]);
 
 	const getFilteredUsers = () => {
@@ -31,44 +38,40 @@ const Table = ({ searchValue }: any) => {
 			const searchWord = searchValue.toLowerCase();
 
 			return (
-				name.some((word: any) => word.startsWith(searchWord)) ||
-				userName.some((word: any) => word.startsWith(searchWord)) ||
-				email.some((word: any) => word.startsWith(searchWord))
+				name.some((word: stringType) => word.startsWith(searchWord)) ||
+				userName.some((word: stringType) => word.startsWith(searchWord)) ||
+				email.some((word: stringType) => word.startsWith(searchWord))
 			);
 		});
 	};
 
-	const getTransformedUsers = (users: any) => {
-		const getAddress = (address: any) => {
-			const { city, street, suite } = address;
-			return `${city}, ${street}, ${suite}`;
-		};
+	// const getTransformedUsers = (users: any) => {
+	// 	const getAddress = (address: any) => {
+	// 		const { city, street, suite } = address;
+	// 		return `${city}, ${street}, ${suite}`;
+	// 	};
 
-		const transformedUsers = users.map((user: any) => ({
-			...user,
-			address: getAddress(user.address),
-			company: user.company.name,
-		}));
+	// 	const transformedUsers = users.map((user: any) => ({
+	// 		...user,
+	// 		address: getAddress(user.address),
+	// 		company: user.company.name,
+	// 	}));
 
-		return transformedUsers;
-	};
-
+	// 	return transformedUsers;
+	// };
 
 	return (
 		<S.Container>
 			<S.Header>
 				{tableColumns.map((column) => (
-					<S.Ceil
-						key={column.label}
-					
-					>
+					<S.Ceil key={column.label}>
 						<S.Line>{column.label}</S.Line>
-						<S.Arrow  />
+						<S.Arrow />
 					</S.Ceil>
 				))}
 			</S.Header>
 			<S.Content>
-				{isLoading ? (
+				{loading ? (
 					<S.LoaderWrapper>
 						<BeatLoader color="#36d7b7" />
 					</S.LoaderWrapper>

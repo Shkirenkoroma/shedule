@@ -5,6 +5,7 @@ import { setEmployers, unSetLoading, setErrorData} from "../reducer";
 function* sagaEmployers() {
 
    try {
+      console.log('run saga')
       //@ts-ignore
       const data = yield call(getUsers);
       yield put(setEmployers(data));
@@ -21,5 +22,5 @@ function* sagaGetEmployers(){
 }
 
 export default function* rootSaga(){
-   yield all([])
+   yield all([sagaGetEmployers()])
 }

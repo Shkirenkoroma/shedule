@@ -4,7 +4,7 @@ import Table from "./components/table/table";
 import * as S from "./App.styles";
 
 const App = () => {
-	const [searchValue, setSearchValue] = useState("");
+	const [searchValue, setSearchValue] = useState<string>("");
 	const handleUserName = (value:any) => {
 		setSearchValue(value);
 	};
