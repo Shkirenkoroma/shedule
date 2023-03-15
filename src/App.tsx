@@ -11,7 +11,7 @@ const App = () => {
 
 	return (
 		<S.Container>
-			<Header onChange={handleUserName} />
+			<Header onChange={handleUserName} setSearchValue={setSearchValue} searchValue={searchValue}/>
 			<Table searchValue={searchValue} />
 		</S.Container>
 	);

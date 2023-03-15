@@ -16,6 +16,8 @@ const Hightlight = (props:any) => {
     return str.split(regexp).map((s:any, index:any, array:any) => {
       if (index < array.length - 1) {
         const c = matchValue.shift()
+		  console.log('c', c)
+		  console.log('s', s)
         return <>{s}<S.Line className={'hightlight'}>{c}</S.Line></>
       }
       return s
@@ -29,8 +31,8 @@ const Row = ({ user, setFilteredUsers, searchValue }: any) => {
 	const { id, name, username, email } = user;
 
   const light = useCallback((str:any) => {
-    console.log('str', str)
-    return <Hightlight searchValue={searchValue} str={str} />
+    
+	return <Hightlight searchValue={searchValue} str={str} />
   }, [searchValue])
 
 

@@ -1,9 +1,14 @@
 import * as S from "./header.styles";
 
-const Header = ({ onChange }:any) => {
+const Header = ({ onChange, setSearchValue, searchValue }:any) => {
   const handleUserName = (event:any) => {
     onChange(event.target.value);
   };
+
+  const resetState = () => {
+    setSearchValue('')
+    //Должен быть диспатч, который запустит снова запрос
+  }
 
   return (
     <S.Container>
@@ -12,7 +17,9 @@ const Header = ({ onChange }:any) => {
         onChange={handleUserName}
         placeholder="Search"
         type="text"
+        value={searchValue}
       />
+      <button onClick={resetState}>Сбросить</button>
     </S.Container>
   );
 };

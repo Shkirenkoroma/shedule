@@ -1,0 +1,41 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const employersSlice = createSlice({
+	name: "employers",
+	initialState: {
+		employers: [],
+		employer: [],
+		loading: false,
+      errorData:''
+	},
+	reducers: {
+		getEmployers: (state) => {
+			state.loading = true;
+		},
+		setEmployers: (state, action) => {
+			state.employers = action.payload;
+		},
+		getEmployer: (state) => {
+			state.loading = true;
+		},
+		setEmployer: (state, action) => {
+			state.employer = action.payload;
+		},
+		unSetLoading: (state) => {
+			state.loading = false;
+		},
+      setErrorData:(state,action) => {
+         state.errorData = action.payload
+      }
+	},
+});
+
+export const employersReducer = employersSlice.reducer;
+export const {
+   getEmployers,
+   setEmployers,
+   getEmployer,
+   setEmployer,
+   unSetLoading,
+   setErrorData
+} = employersSlice.actions;
