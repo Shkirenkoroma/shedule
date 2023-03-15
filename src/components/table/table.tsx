@@ -39,11 +39,12 @@ const Table = ({ searchValue }:any) => {
 
   const getFilteredUsers = () => {
     return initialUsers.filter((user:any) => {
-      const userNames = user.name.toLowerCase().split(" ");
+      const name = user.name.toLowerCase().split(" ");
+      const userName = user.username.toLowerCase().split(" ");
+      const email = user.email.toLowerCase().split(" ");
       const searchWord = searchValue.toLowerCase();
-      const isHasMatches = userNames.some((word:any) => word.startsWith(searchWord));
 
-      return isHasMatches;
+      return name.some((word:any) => word.startsWith(searchWord)) || userName.some((word:any) => word.startsWith(searchWord)) || email.some((word:any) => word.startsWith(searchWord));
     });
   };
 
@@ -125,7 +126,7 @@ const Table = ({ searchValue }:any) => {
         ) : (
           <>
             {filteredUsers.map((user:any) => (
-              <Row user={user} key={user.id} />
+              <Row user={user} key={user.id} setFilteredUsers={setFilteredUsers} searchValue={searchValue}/>
             ))}
           </>
         )}

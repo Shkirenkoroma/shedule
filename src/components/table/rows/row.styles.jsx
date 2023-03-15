@@ -7,6 +7,11 @@ export const Container = styled.ul`
 	padding: 0;
 	margin: 0;
 	cursor: default;
+	&:hover{
+		cursor: pointer;
+		background-color: #cdcdcd;
+		transition: background-color 900ms;
+	}
 `;
 
 export const FirstCeil = styled.li`
@@ -38,3 +43,11 @@ export const String = styled.span`
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
 `;
+
+export const Button = styled.button`
+	
+`
+
+export const Line = styled.span`
+	background-color: #f0f902;
+`
