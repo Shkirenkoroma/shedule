@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/shedule/static/css/main.589f435c.css",
+    "main.js": "/shedule/static/js/main.787e9f16.js",
+    "index.html": "/shedule/index.html",
+    "main.589f435c.css.map": "/shedule/static/css/main.589f435c.css.map",
+    "main.787e9f16.js.map": "/shedule/static/js/main.787e9f16.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.589f435c.css",
+    "static/js/main.787e9f16.js"
+  ]
+}
