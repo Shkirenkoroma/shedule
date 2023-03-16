@@ -7,9 +7,10 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 800px;
+	width: 900px;
 	background-color: #ffffff;
-	border-radius: 20px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 `;
 
 export const Ceil = styled.li`
@@ -22,7 +23,7 @@ export const Ceil = styled.li`
 
 export const Count = styled.div`
 	position: relative;
-	left: 345px;
+	left: 380px;
 `;
 
 export const Line = styled.span`
@@ -71,16 +72,16 @@ export const LineHeader = styled.span`
 
 export const Header = styled.ul`
 	display: flex;
-	width: 800px;
+	width: 900px;
 	height: 35px;
 	border-bottom: 2px solid #f5f5f5;
 	padding: 0px;
 `;
 
 export const Content = styled.div`
-	width: 800px;
+	width: 900px;
 	overflow: overlay;
-	height: 430px;
+	height: 530px;
 `;
 
 export const LoaderWrapper = styled.div`
@@ -90,3 +91,4 @@ export const LoaderWrapper = styled.div`
 	width: 100%;
 	height: 100%;
 `;
+

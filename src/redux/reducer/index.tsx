@@ -21,6 +21,9 @@ const employersSlice = createSlice({
 		setEmployer: (state, action) => {
 			state.employer = action.payload;
 		},
+		setLoading:(state) => {
+			state.loading = true
+		},
 		unSetLoading: (state) => {
 			state.loading = false;
 		},
@@ -36,6 +39,7 @@ export const {
    setEmployers,
    getEmployer,
    setEmployer,
+	setLoading,
    unSetLoading,
    setErrorData
 } = employersSlice.actions;

@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import Modal from "components/modal/modal";
 import { FC } from "react";
+import { useLayoutEffect } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
@@ -10,19 +12,20 @@ import Row from "./rows/row";
 import * as S from "./table.styles";
 
 const Table: FC<any> = ({ searchValue }): JSX.Element => {
-	const [initialUsers, setInitialUsers] = useState([]);
-	const [filteredUsers, setFilteredUsers] = useState([]);
+	const initialUsers = useSelector((state: any) => state.employers.employers);
+	const [initialUser, setInitialUsers] = useState([]);
+	const [filteredUser, setFilteredUsers] = useState([]);
+	const [activeModal, setActiveModal] = useState<boolean>(false);
+
 	const dispatch = useDispatch();
 	const loading = useSelector((state: any) => state.employers.loading);
-	const data = useSelector((state: any) => state.employers.employers);
-
-	console.log("data from saga", data);
 
 	useEffect(() => {
-		console.log(" filteredUsers in useEffect", filteredUsers);
+		setFilteredUsers(initialUsers);
+		setInitialUsers(initialUsers);
+	}, [initialUsers]);
 
-		setInitialUsers(data);
-		setFilteredUsers(data);
+	useEffect(() => {
 		dispatch(getEmployers());
 	}, []);
 
@@ -31,7 +34,7 @@ const Table: FC<any> = ({ searchValue }): JSX.Element => {
 	}, [searchValue]);
 
 	const getFilteredUsers = () => {
-		return initialUsers.filter((user: any) => {
+		return initialUser.filter((user: any) => {
 			const name = user.name.toLowerCase().split(" ");
 			const userName = user.username.toLowerCase().split(" ");
 			const email = user.email.toLowerCase().split(" ");
@@ -45,20 +48,6 @@ const Table: FC<any> = ({ searchValue }): JSX.Element => {
 		});
 	};
 
-	// const getTransformedUsers = (users: any) => {
-	// 	const getAddress = (address: any) => {
-	// 		const { city, street, suite } = address;
-	// 		return `${city}, ${street}, ${suite}`;
-	// 	};
-
-	// 	const transformedUsers = users.map((user: any) => ({
-	// 		...user,
-	// 		address: getAddress(user.address),
-	// 		company: user.company.name,
-	// 	}));
-
-	// 	return transformedUsers;
-	// };
 
 	return (
 		<S.Container>
@@ -77,20 +66,22 @@ const Table: FC<any> = ({ searchValue }): JSX.Element => {
 					</S.LoaderWrapper>
 				) : (
 					<>
-						{filteredUsers.map((user: any) => (
+						{filteredUser.map((user: any) => (
 							<Row
 								user={user}
 								key={user.id}
 								setFilteredUsers={setFilteredUsers}
 								searchValue={searchValue}
+								setActiveModal={setActiveModal}
 							/>
 						))}
 					</>
 				)}
 			</S.Content>
 			<S.Count>
-				<S.LineCount>Итого: {filteredUsers.length}</S.LineCount>
+				<S.LineCount>Итого: {filteredUser.length}</S.LineCount>
 			</S.Count>
+			{activeModal ? <Modal setActiveModal={setActiveModal}/> : null}
 		</S.Container>
 	);
 };
