@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	background-color: #f5f5f5;
-
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -17,6 +16,7 @@ export const Title = styled.h1`
 	font-weight: 700;
 	font-size: 32px;
 `;
+
 export const Input = styled.input`
 	width: 250px;
 	border: none;

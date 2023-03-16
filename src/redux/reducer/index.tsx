@@ -6,7 +6,8 @@ const employersSlice = createSlice({
 		employers: [],
 		employer: [],
 		loading: false,
-      errorData:''
+      errorData:'',
+		id:0
 	},
 	reducers: {
 		getEmployers: (state) => {
@@ -15,8 +16,9 @@ const employersSlice = createSlice({
 		setEmployers: (state, action) => {
 			state.employers = action.payload;
 		},
-		getEmployer: (state) => {
+		getEmployer: (state, action) => {
 			state.loading = true;
+			state.id = action.payload
 		},
 		setEmployer: (state, action) => {
 			state.employer = action.payload;
@@ -27,7 +29,7 @@ const employersSlice = createSlice({
 		unSetLoading: (state) => {
 			state.loading = false;
 		},
-      setErrorData:(state,action) => {
+      setErrorData:(state, action) => {
          state.errorData = action.payload
       }
 	},

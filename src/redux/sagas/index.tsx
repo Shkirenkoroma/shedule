@@ -1,20 +1,19 @@
 import { put, call, all, takeEvery } from "redux-saga/effects";
-import { getUsers, getUser, getTransformedUsers } from "../../common/api/helpers";
+import { getUsers, getUser } from "common/api/helpers";
 import {
 	setEmployers,
 	unSetLoading,
 	setErrorData,
 	setEmployer,
 	setLoading,
+	getEmployer,
+	getEmployers,
 } from "../reducer";
-
+import { IDataEmployer, IPayloadTypes } from "types";
 
 function* sagaEmployers() {
 	try {
-		console.log("run saga");
-		//@ts-ignore
-		const data = yield call(getUsers);
-		console.log("data saga", data);
+		const data:IDataEmployer[] = yield call(getUsers);
 		yield put(setEmployers(data));
 		yield put(unSetLoading());
 	} catch {
@@ -24,15 +23,13 @@ function* sagaEmployers() {
 }
 
 function* sagaWatcherEmployers() {
-	yield takeEvery("employers/getEmployers", sagaEmployers);
+	yield takeEvery(getEmployers, sagaEmployers);
 }
 
-function* sagaEmployer(action:any) {
+function* sagaEmployer( action: IPayloadTypes ) {
 	try {
 		yield put(setLoading());
-		//@ts-ignore
-		const data = yield call(getUser, action.payload);
-		console.log('data', data)
+		const data:IDataEmployer = yield call(getUser, action.payload);
 		yield put(setEmployer(data));
 		yield put(unSetLoading());
 	} catch {
@@ -42,7 +39,7 @@ function* sagaEmployer(action:any) {
 }
 
 function* sagaWatcherEmployer() {
-	yield takeEvery("employers/getEmployer", sagaEmployer);
+	yield takeEvery(getEmployer, sagaEmployer);
 }
 
 export default function* rootSaga() {

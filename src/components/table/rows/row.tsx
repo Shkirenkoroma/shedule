@@ -4,55 +4,31 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { getEmployer } from "redux/reducer";
+import LightString from "../lightstring";
+import { IDataEmployer, IPropsRow, numberType, stringType } from "types";
+import { FC } from "react";
 
-const Hightlight = (props: any) => {
-	const { searchValue, str } = props;
-	if (!searchValue) return str;
-	const regexp = new RegExp(searchValue, "ig");
-	const matchValue = str.match(regexp);
-
-	if (matchValue) {
-
-		return str.split(regexp).map((s: any, index: any, array: any) => {
-			if (index < array.length - 1) {
-				const c = matchValue.shift();
-				console.log("c", c);
-				console.log("s", s);
-				return (
-					<>
-						{s}
-						<S.Line className={"hightlight"}>{c}</S.Line>
-					</>
-				);
-			}
-			return s;
-		});
-	}
-	return str;
-};
-
-const Row = ({ user, setFilteredUsers, searchValue, setActiveModal }: any) => {
+const Row: FC<IPropsRow> = ({ user, setFilteredUsers, searchValue, setActiveModal }): JSX.Element => {
 	const { id, name, username, email } = user;
 	const dispatch = useDispatch();
 
 	const light = useCallback(
-		(str: any) => {
-			return <Hightlight searchValue={searchValue} str={str} />;
+		(string: stringType) => {
+			return <LightString searchValue={searchValue} string={string} />;
 		},
 		[searchValue],
 	);
 
-	const deleteTodo = (id: any) => {
-		setFilteredUsers((prev: any) => [
-			...prev.filter((item: any) => item.id !== id),
+	const deleteTodo = (id: numberType) => {
+		setFilteredUsers((prev: IDataEmployer[]) => [
+			...prev.filter((item) => item.id !== id),
 		]);
 	};
 
 	const getDataUser = () => {
-		console.log('id', id)
 		dispatch(getEmployer(id));
-		setActiveModal(true)
-	}
+		setActiveModal(true);
+	};
 
 	return (
 		<S.Container onClick={getDataUser}>
@@ -67,8 +43,10 @@ const Row = ({ user, setFilteredUsers, searchValue, setActiveModal }: any) => {
 			</S.ThirdCeil>
 			<FontAwesomeIcon
 				icon={faTrash}
-				onClick={(e) => {e.stopPropagation() 
-					deleteTodo(id)}}
+				onClick={(e) => {
+					e.stopPropagation();
+					deleteTodo(id);
+				}}
 			/>
 		</S.Container>
 	);

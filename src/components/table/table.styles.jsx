@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import down from "../../images/down.png";
-import up from "../../images/up.png";
 
 export const Container = styled.div`
 	display: flex;
@@ -34,23 +32,6 @@ export const Line = styled.span`
 	color: #cdcdcd;
 `;
 
-export const Arrow = styled.div`
-	display: flex;
-	width: 20px;
-	height: 20px;
-	margin-left: 3px;
-	background-size: contain;
-	background-repeat: no-repeat;
-
-	&.asc {
-		background-image: url(${down});
-	}
-
-	&.desc {
-		background-image: url(${up});
-	}
-`;
-
 export const LineCount = styled.span`
 	font-family: "Arial";
 	font-style: normal;
@@ -58,6 +39,7 @@ export const LineCount = styled.span`
 	font-size: 20px;
 	color: #000;
 `;
+
 export const Input = styled.input`
 	width: 250px;
 	height: 30px;
@@ -91,4 +73,3 @@ export const LoaderWrapper = styled.div`
 	width: 100%;
 	height: 100%;
 `;
-

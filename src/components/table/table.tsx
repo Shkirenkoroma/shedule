@@ -1,24 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Modal from "components/modal/modal";
 import { FC } from "react";
-import { useLayoutEffect } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { getEmployers } from "redux/reducer";
-import { stringType } from "types";
+import { IDataEmployer, IPropsString, IState, stringType } from "types";
 import { tableColumns } from "utils/utils";
 import Row from "./rows/row";
 import * as S from "./table.styles";
 
-const Table: FC<any> = ({ searchValue }): JSX.Element => {
-	const initialUsers = useSelector((state: any) => state.employers.employers);
-	const [initialUser, setInitialUsers] = useState([]);
-	const [filteredUser, setFilteredUsers] = useState([]);
+const Table:FC<IPropsString> = ({ searchValue }): JSX.Element => {
+	const initialUsers = useSelector((state: IState) => state.employers.employers);
+	const [initialUser, setInitialUsers] = useState<IDataEmployer[]>([]);
+	const [filteredUser, setFilteredUsers] = useState<IDataEmployer[]>([]);
 	const [activeModal, setActiveModal] = useState<boolean>(false);
-
 	const dispatch = useDispatch();
-	const loading = useSelector((state: any) => state.employers.loading);
+	const loading = useSelector((state: IState) => state.employers.loading);
 
 	useEffect(() => {
 		setFilteredUsers(initialUsers);
@@ -34,7 +32,7 @@ const Table: FC<any> = ({ searchValue }): JSX.Element => {
 	}, [searchValue]);
 
 	const getFilteredUsers = () => {
-		return initialUser.filter((user: any) => {
+		return initialUser.filter((user: IDataEmployer) => {
 			const name = user.name.toLowerCase().split(" ");
 			const userName = user.username.toLowerCase().split(" ");
 			const email = user.email.toLowerCase().split(" ");
@@ -48,14 +46,13 @@ const Table: FC<any> = ({ searchValue }): JSX.Element => {
 		});
 	};
 
-
 	return (
 		<S.Container>
 			<S.Header>
 				{tableColumns.map((column) => (
 					<S.Ceil key={column.label}>
 						<S.Line>{column.label}</S.Line>
-						<S.Arrow />
+						
 					</S.Ceil>
 				))}
 			</S.Header>
@@ -66,7 +63,7 @@ const Table: FC<any> = ({ searchValue }): JSX.Element => {
 					</S.LoaderWrapper>
 				) : (
 					<>
-						{filteredUser.map((user: any) => (
+						{filteredUser.map((user) => (
 							<Row
 								user={user}
 								key={user.id}
@@ -81,7 +78,7 @@ const Table: FC<any> = ({ searchValue }): JSX.Element => {
 			<S.Count>
 				<S.LineCount>Итого: {filteredUser.length}</S.LineCount>
 			</S.Count>
-			{activeModal ? <Modal setActiveModal={setActiveModal}/> : null}
+			{activeModal ? <Modal setActiveModal={setActiveModal} /> : null}
 		</S.Container>
 	);
 };

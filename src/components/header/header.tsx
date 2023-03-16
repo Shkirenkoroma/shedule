@@ -1,18 +1,19 @@
 import * as S from "./header.styles";
 import { useDispatch } from "react-redux";
 import { getEmployers } from "redux/reducer";
-const Header = ({ onChange, setSearchValue, searchValue }: any) => {
+import { FC } from "react";
+import { IPropsHeader } from "types";
+
+const Header:FC<IPropsHeader> = ({ onChange, setSearchValue, searchValue }):JSX.Element => {
 	const dispatch = useDispatch();
 
-	const handleUserName = (event: any) => {
-		onChange(event.target.value);
+	const handleUserName = (event:React.FormEvent<HTMLFormElement>) => {
+		onChange(event.currentTarget.value);
 	};
 
 	const resetState = () => {
 		setSearchValue("");
-
 		dispatch(getEmployers());
-    console.log('getEmployers()', getEmployers())
 	};
 
 	return (
