@@ -5,8 +5,9 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 900px;
-	background-color: #ffffff;
+	max-width: 900px;
+	width: 100%;
+	background-color: #a879a7;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 `;
@@ -17,6 +18,7 @@ export const Ceil = styled.li`
 	color: black;
 	display: flex;
 	justify-content: center;
+	margin-bottom: 7px;
 `;
 
 export const Count = styled.div`
@@ -29,7 +31,10 @@ export const Line = styled.span`
 	font-style: normal;
 	font-weight: 700;
 	font-size: 16px;
-	color: #cdcdcd;
+	color: #000;
+	@media (max-width: 530px) {
+		font-size: 12px;
+	}
 `;
 
 export const LineCount = styled.span`
@@ -54,22 +59,23 @@ export const LineHeader = styled.span`
 
 export const Header = styled.ul`
 	display: flex;
-	width: 900px;
+	max-width: 900px;
+	width: 100%;
 	height: 35px;
 	border-bottom: 2px solid #f5f5f5;
 	padding: 0px;
 `;
 
 export const Content = styled.div`
-	width: 900px;
-	overflow: overlay;
-	height: 530px;
-`;
-
-export const LoaderWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	max-width: 900px;
 	width: 100%;
-	height: 100%;
+	height: 570px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.loader {
+		max-width: 150px;
+		width: 100%;
+		margin: 0 auto;
+	}
 `;

@@ -18,18 +18,31 @@ export const ModalContainer = styled.div`
 		max-width: 300px;
 		width: 100%;
 		padding: 15px 20px 0px 20px;
-		background-color: #cdcdcd;
+		background-color: #9c6b9c;
+		@media (max-width: 530px) {
+			width: 50%;
+			height: 180px;
+		}
 		h2 {
 			margin: 0;
+			@media (max-width: 530px) {
+				font-size: 14px;
+			}
 		}
 		p {
 			font-family: "Edu NSW ACT Foundation", cursive;
 			margin: 10px 0 15px 0;
+			@media (max-width: 530px) {
+				font-size: 12px;
+			}
 		}
 		.companyAddress {
 			display: inline-block;
 			margin-top: 10px;
 			font-family: "Edu NSW ACT Foundation", cursive;
+			@media (max-width: 530px) {
+				font-size: 10px;
+			}
 		}
 	}
 `;

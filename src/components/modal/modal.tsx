@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
 import * as S from "./modal.styles";
-import { FC } from "react"
+import { FC } from "react";
 import { IPropsModal, IState } from "types";
 
-const Modal:FC<IPropsModal> = ({ setActiveModal } ):JSX.Element => {
+const Modal: FC<IPropsModal> = ({ setActiveModal }): JSX.Element => {
 	const address = useSelector(
-		(state:IState) => state.employers.employer.address || [],
+		(state: IState) => state.employers.employer.address || [],
 	);
 	const company = useSelector(
-		(state:IState) => state.employers.employer.company || [],
+		(state: IState) => state.employers.employer.company || [],
 	);
 
 	const deActivateModal = () => {

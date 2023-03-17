@@ -3,20 +3,25 @@ import Modal from "components/modal/modal";
 import { FC } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BeatLoader } from "react-spinners";
 import { getEmployers } from "redux/reducer";
 import { IDataEmployer, IPropsString, IState, stringType } from "types";
 import { tableColumns } from "utils/utils";
 import Row from "./rows/row";
 import * as S from "./table.styles";
+import { LineWave } from "react-loader-spinner";
 
-const Table:FC<IPropsString> = ({ searchValue }): JSX.Element => {
-	const initialUsers = useSelector((state: IState) => state.employers.employers);
+const Table: FC<IPropsString> = ({ searchValue }): JSX.Element => {
+	const initialUsers = useSelector(
+		(state: IState) => state.employers.employers,
+	);
 	const [initialUser, setInitialUsers] = useState<IDataEmployer[]>([]);
 	const [filteredUser, setFilteredUsers] = useState<IDataEmployer[]>([]);
 	const [activeModal, setActiveModal] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const loading = useSelector((state: IState) => state.employers.loading);
+	const errorMessage = useSelector(
+		(state: IState) => state.employers.errorData,
+	);
 
 	useEffect(() => {
 		setFilteredUsers(initialUsers);
@@ -52,16 +57,20 @@ const Table:FC<IPropsString> = ({ searchValue }): JSX.Element => {
 				{tableColumns.map((column) => (
 					<S.Ceil key={column.label}>
 						<S.Line>{column.label}</S.Line>
-						
 					</S.Ceil>
 				))}
 			</S.Header>
 			<S.Content>
 				{loading ? (
-					<S.LoaderWrapper>
-						<BeatLoader color="#36d7b7" />
-					</S.LoaderWrapper>
-				) : (
+					<LineWave
+						height="350"
+						width="350"
+						color="#cdcdcd"
+						ariaLabel="line-wave"
+						visible={true}
+						wrapperClass="loader"
+					/>
+				) : filteredUser.length ? (
 					<>
 						{filteredUser.map((user) => (
 							<Row
@@ -73,12 +82,13 @@ const Table:FC<IPropsString> = ({ searchValue }): JSX.Element => {
 							/>
 						))}
 					</>
+				) : (
+					<div>{errorMessage}</div>
 				)}
 			</S.Content>
-			<S.Count>
-				<S.LineCount>Итого: {filteredUser.length}</S.LineCount>
-			</S.Count>
-			{activeModal ? <Modal setActiveModal={setActiveModal} /> : null}
+			{activeModal ? (
+				<Modal setActiveModal={setActiveModal} loading={loading} />
+			) : null}
 		</S.Container>
 	);
 };

@@ -13,7 +13,7 @@ import { IDataEmployer, IPayloadTypes } from "types";
 
 function* sagaEmployers() {
 	try {
-		const data:IDataEmployer[] = yield call(getUsers);
+		const data: IDataEmployer[] = yield call(getUsers);
 		yield put(setEmployers(data));
 		yield put(unSetLoading());
 	} catch {
@@ -26,10 +26,10 @@ function* sagaWatcherEmployers() {
 	yield takeEvery(getEmployers, sagaEmployers);
 }
 
-function* sagaEmployer( action: IPayloadTypes ) {
+function* sagaEmployer(action: IPayloadTypes) {
 	try {
 		yield put(setLoading());
-		const data:IDataEmployer = yield call(getUser, action.payload);
+		const data: IDataEmployer = yield call(getUser, action.payload);
 		yield put(setEmployer(data));
 		yield put(unSetLoading());
 	} catch {

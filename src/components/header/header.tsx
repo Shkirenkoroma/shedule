@@ -4,10 +4,14 @@ import { getEmployers } from "redux/reducer";
 import { FC } from "react";
 import { IPropsHeader } from "types";
 
-const Header:FC<IPropsHeader> = ({ onChange, setSearchValue, searchValue }):JSX.Element => {
+const Header: FC<IPropsHeader> = ({
+	onChange,
+	setSearchValue,
+	searchValue,
+}): JSX.Element => {
 	const dispatch = useDispatch();
 
-	const handleUserName = (event:React.FormEvent<HTMLFormElement>) => {
+	const handleUserName = (event: React.FormEvent<HTMLFormElement>) => {
 		onChange(event.currentTarget.value);
 	};
 
@@ -25,7 +29,9 @@ const Header:FC<IPropsHeader> = ({ onChange, setSearchValue, searchValue }):JSX.
 				type="text"
 				value={searchValue}
 			/>
-			<button onClick={resetState}>Сбросить</button>
+			<button onClick={resetState}>
+				<span>Сбросить</span>
+			</button>
 		</S.Container>
 	);
 };

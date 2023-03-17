@@ -8,7 +8,12 @@ import LightString from "../lightstring";
 import { IDataEmployer, IPropsRow, numberType, stringType } from "types";
 import { FC } from "react";
 
-const Row: FC<IPropsRow> = ({ user, setFilteredUsers, searchValue, setActiveModal }): JSX.Element => {
+const Row: FC<IPropsRow> = ({
+	user,
+	setFilteredUsers,
+	searchValue,
+	setActiveModal,
+}): JSX.Element => {
 	const { id, name, username, email } = user;
 	const dispatch = useDispatch();
 
@@ -31,23 +36,20 @@ const Row: FC<IPropsRow> = ({ user, setFilteredUsers, searchValue, setActiveModa
 	};
 
 	return (
-		<S.Container onClick={getDataUser}>
-			<S.FirstCeil>
-				<S.String>{light(name)}</S.String>
-			</S.FirstCeil>
-			<S.SecondCeil>
-				<S.String>{light(username)}</S.String>
-			</S.SecondCeil>
-			<S.ThirdCeil>
-				<S.String>{light(email)}</S.String>
-			</S.ThirdCeil>
-			<FontAwesomeIcon
-				icon={faTrash}
-				onClick={(e) => {
-					e.stopPropagation();
-					deleteTodo(id);
-				}}
-			/>
+		<S.Container>
+			<S.ContainerList onClick={getDataUser}>
+				<S.FirstCeil>{light(name)}</S.FirstCeil>
+				<S.SecondCeil>{light(username)}</S.SecondCeil>
+				<S.ThirdCeil>{light(email)}</S.ThirdCeil>
+				<FontAwesomeIcon
+					icon={faTrash}
+					className="icon"
+					onClick={(e) => {
+						e.stopPropagation();
+						deleteTodo(id);
+					}}
+				/>
+			</S.ContainerList>
 		</S.Container>
 	);
 };

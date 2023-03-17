@@ -2,11 +2,11 @@ export type stringType = string;
 export type booleanType = boolean;
 export type numberType = number;
 export interface IPropsString {
-	searchValue:stringType
+	searchValue: stringType;
 }
 
 export interface IPayloadTypes {
-	payload: numberType
+	payload: numberType;
 }
 export interface IPropsHeader {
 	onChange: (e: stringType) => void;
@@ -15,7 +15,8 @@ export interface IPropsHeader {
 }
 
 export interface IPropsModal {
-	setActiveModal: (e:booleanType) => void;
+	setActiveModal: (e: booleanType) => void;
+	loading: booleanType;
 }
 export interface IState {
 	employers: {
@@ -23,7 +24,7 @@ export interface IState {
 		employer: IDataEmployer;
 		loading: booleanType;
 		errorData: stringType;
-		id:numberType
+		id: numberType;
 	};
 }
 
@@ -46,7 +47,7 @@ export interface IDataCompany {
 	bs: stringType;
 }
 
-export interface 	IDataEmployer {
+export interface IDataEmployer {
 	id: numberType;
 	name: stringType;
 	username: stringType;
@@ -58,14 +59,13 @@ export interface 	IDataEmployer {
 }
 
 export interface IPropsRow {
-	user:IDataEmployer,
-	setFilteredUsers:(e:any) => void ,
-	searchValue:  stringType  ,
-	setActiveModal:(e:boolean)=>void
+	user: IDataEmployer;
+	setFilteredUsers: (e: any) => void;
+	searchValue: stringType;
+	setActiveModal: (e: boolean) => void;
 }
 
-
-export interface IPropsLightString{
-	searchValue:stringType,
-	string:stringType
+export interface IPropsLightString {
+	searchValue: stringType;
+	string: stringType;
 }
