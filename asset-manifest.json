@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/shedule/static/css/main.e7bd62ba.css",
-    "main.js": "/shedule/static/js/main.609727d4.js",
+    "main.css": "/shedule/static/css/main.7d27e6cb.css",
+    "main.js": "/shedule/static/js/main.a849f730.js",
+    "static/media/back.jpg": "/shedule/static/media/back.d2f2b3a6387e1c562781.jpg",
     "index.html": "/shedule/index.html",
-    "main.e7bd62ba.css.map": "/shedule/static/css/main.e7bd62ba.css.map",
-    "main.609727d4.js.map": "/shedule/static/js/main.609727d4.js.map"
+    "main.7d27e6cb.css.map": "/shedule/static/css/main.7d27e6cb.css.map",
+    "main.a849f730.js.map": "/shedule/static/js/main.a849f730.js.map"
   },
   "entrypoints": [
-    "static/css/main.e7bd62ba.css",
-    "static/js/main.609727d4.js"
+    "static/css/main.7d27e6cb.css",
+    "static/js/main.a849f730.js"
   ]
 }
